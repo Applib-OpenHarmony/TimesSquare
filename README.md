@@ -104,7 +104,7 @@ You can style the Calendar  using theses attributes :
 Supports OpenHarmony API version 9
 ## Code Contribution
 ****
-If you find any problems during usage, you can submit an [issue](https://github.com/satvikshubham/times-square/issues) to us. Of course, we also welcome you to send us PR.
+If you find any problems during usage, you can submit an [issue](https://github.com/Applib-OpenHarmony/TimesSquare/issues) to us. Of course, we also welcome you to send us PR.
 ## Open source License
 ****
 This project is based on [Apache License 2.0](./LICENSE), please enjoy and participate in open source freely.
