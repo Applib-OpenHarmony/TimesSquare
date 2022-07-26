@@ -32,7 +32,7 @@ export struct CalendarMainModel {
   currentYear = new Date().getFullYear()
   monthArray: number[]
   yearArray: number []
-  indexArray: number [] = Array.apply(null, Array(23)).map(function (item, i) {
+  indexArray: number [] = Array.apply(null, Array(25)).map(function (item, i) {
     return i
   })
   dialogBoxController: CustomDialogController = new CustomDialogController({

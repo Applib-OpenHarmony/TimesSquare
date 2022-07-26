@@ -1,65 +1,51 @@
 # Times Square
 ****
 Times Square helps you to pick and customize calendar with multiple attributes and support for Arabic calendar 
-## Dependencies
+## Download & Install
 ****
+Install using: 
+```
+npm i @ohos/times_square
+```
 For using Times Square in your app, add the below dependency in the entry/package.json  
 ```
 "dependencies": {
     "@ohos/times_square": "file:../times_square"
   }
 ```
-Add dependency command with
-```
-npm i @ohos/times_square
-```
+
 ## Usage instructions
 ****
-Import all components at once
+#### Import all components at once
 ```
-import { CalendarMainModel } from '@ohos/times_square'
+import { CalendarMainModel, CalendarType } from '@ohos/times_square'
 ```
-## Screenshots
-****
-![](./Images/Single.png)
-![](./Images/Multi.png)
-![](./Images/Range.png)
-![](./Images/Dialog.png)
-![](./Images/Customized.png)
-![](./Images/Arabic.png)
-![](./Images/ArabicWithDigits.png)
-![](./Images/CustomView.png)
-## How to use it
-### Imports
-Import the following
-```
-import { CalendarMainModel } from '@ohos/times_square'
-```
-### Code
+
+#### Code
 To use the calendar dependency
 ```
 CalendarMainModel({
   options{
-          tsTypeOfCalendar: Type of Calendar CalendarType.[Single|Multi|Range],
-          tsBgColor: Calendar background color,
-          tsGridTextSize: Calendar grid text size,
-          tsMonthTextSize:  Calendar month text size,
-          tsMonthTextColor: Calendar month text color,
-          tsSelectedTextColor: Calendar selected text color,
-          tsSelectedGridBackgroundColor: Calendar selected grid background color,
-          tsNotInMonthTextColor: Calendar not in month text color,
-          tsInMonthColor: Calendar in month text color,
-          tsNotInMonthColor: Calendar grid not in month color,
-          tsInMonthTextColor: Calendar grid in month color,
-          tsSetSelection: Setting selection,
-          tsWithNumbers: Display numbers [For arabic only],
-          tsLanguage: [English|Arabic],
-          tsGridShape: Calendar grid shape [Square|Circle],
+          tsTypeOfCalendar: CalendarType.SINGLE, // Type of Calendar CalendarType.[Single|Multi|Range]
+          tsBgColor: "#FFFFFF", //Calendar background color
+          tsGridTextSize: '14fp', //Calendar grid text size
+          tsMonthTextSize: '14fp', //Calendar month text size
+          tsMonthTextColor: "#000000", //Calendar month text color
+          tsSelectedTextColor: "#fafafa", //Calendar selected text color
+          tsSelectedGridBackgroundColor: "#3a4352", //Calendar selected grid background color
+          tsNotInMonthTextColor: "#787a7d", //Calendar not in month text color
+          tsInMonthColor: "#ebf5ef", //Calendar in month text color
+          tsNotInMonthColor: "#d0d9d4", //Calendar grid not in month color
+          tsInMonthTextColor: "#303133", //Calendar grid in month color
+          tsSetSelection: true, //Setting selection
+          tsWithNumbers: true, //Display numbers [For arabic only]
+          tsLanguage: "English", //[English|Arabic]
+          tsGridShape: "Square", //Calendar grid shape [Square|Circle]
+          tsDayIcon: $r('app.media.app_icon'), //Calendar day icon
           }
 ```
 Options : CalendarOptions to set the options of the calendar
 For example : 
-
 ```
 options: {
             tsTypeOfCalendar: CalendarType.SINGLE,
@@ -80,7 +66,17 @@ options: {
             tsDayIcon: $r('app.media.app_icon')
           }
 ```
-## Styling
+## Screenshots
+****
+![](./Images/Single.png)
+![](./Images/Multi.png)
+![](./Images/Range.png)
+![](./Images/Dialog.png)
+![](./Images/Customized.png)
+![](./Images/Arabic.png)
+![](./Images/ArabicWithDigits.png)
+![](./Images/CustomView.png)
+## Attributes
 ****
 You can style the Calendar  using theses attributes :
 

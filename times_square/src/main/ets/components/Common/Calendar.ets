@@ -66,7 +66,7 @@ export class Calendar {
     let listOfYear: number[] = []
     let currYear = year - 1;
     let i = 0
-    while (i < 24) {
+    while (i < 25) {
       listOfYear.push(currYear)
       listOfMonths.push(month)
       month = month + 1
