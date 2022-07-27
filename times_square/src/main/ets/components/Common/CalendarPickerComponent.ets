@@ -17,16 +17,17 @@
 import { CalendarCellComponent } from './CalendarCellComponent'
 import { DATE } from './DATE'
 import { Calendar }from './Calendar'
-import { CalendarModel } from './CalendarModel'
+import { CalendarPickerModel } from './CalendarPickerModel'
 import { monthInEnglish, weekDaysInEnglish, weekDaysInArabic, monthsInArabic, arabicDigits } from './Values'
 import { CalendarOptions } from './Types'
 import prompt from '@system.prompt';
 
 
 @Component
-export struct CalendarMainModel {
+export struct CalendarPickerComponent {
   options: CalendarOptions = undefined
-  @State calendarModel: CalendarModel = undefined
+  clickListener : (selectedDate : DATE[] ) => void = undefined
+  @State CalendarPickerModel: CalendarPickerModel = undefined
   @State selectedDates: number[][] = []
   currentMonth = new Date().getMonth()
   currentYear = new Date().getFullYear()
@@ -46,54 +47,56 @@ export struct CalendarMainModel {
     var temp = Calendar.getCalendarForYear(this.currentMonth, this.currentYear)
     this.monthArray = temp.listOfMonths
     this.yearArray = temp.listOfYear
-    if (this.calendarModel == undefined) {
-      this.calendarModel = new CalendarModel(this.options);
+    if (this.CalendarPickerModel == undefined) {
+      this.CalendarPickerModel = new CalendarPickerModel(this.options);
     }
-    if (this.calendarModel.tsIsDialog) {
+    if (this.CalendarPickerModel.tsIsDialog) {
       this.dialogBoxController.open()
     }
   }
 
   build() {
     Column() {
-      if (!this.calendarModel.tsIsDialog) {
+      if (!this.CalendarPickerModel.tsIsDialog) {
         List({ initialIndex: 13 }) {
           ForEach(this.indexArray, (item) => {
             ListItem() {
               Month({
                 month: this.monthArray[item],
                 year: this.yearArray[item],
-                calendarModel: $calendarModel,
-                selectedDates: $selectedDates
+                CalendarPickerModel: $CalendarPickerModel,
+                selectedDates: $selectedDates,
+                clickListener : this.clickListener
               })
             }
           })
         }
       }
-    }.backgroundColor(this.calendarModel.tsBgColor)
+    }.backgroundColor(this.CalendarPickerModel.tsBgColor)
   }
 }
 
 @Component
 struct Month {
-  @Link calendarModel: CalendarModel
+  @Link CalendarPickerModel: CalendarPickerModel
   @Link selectedDates: number [][]
+  clickListener : (selectedDate : DATE[]) => void = undefined
   year: number = 2021
   month: number = 6
   monthDays: string [] = []
   inMonthArray: boolean []= []
   months: string [] = monthInEnglish
   weekDays: string [] = weekDaysInEnglish
+
   replaceNumberWithArabic = (num: number): string => {
     let arabic = arabicDigits
     let k = ""
-    let fd = num % 10
-    let sd = Math.floor(num / 10)
-    if (sd > 0) {
-      k += arabic[sd]
+    let strNum = num.toString()
+    for (let i = 0;i <strNum.length;i++){
+      let digit = strNum[i]
+      k += arabic[+digit]
     }
-    k += arabic[fd]
-    return k;
+    return k
   }
   rotateAfterEvery7th = (arr: any[]): any[] => {
     for (let i = 0; i < arr.length; i = i + 7) {
@@ -108,8 +111,8 @@ struct Month {
     var temp = Calendar.getDaysArray(this.year, this.month)
     this.monthDays = temp.days
     this.inMonthArray = temp.inMonthArray
-    if (this.calendarModel.tsLanguage === "Arabic") {
-      if (!this.calendarModel.tsWithNumbers) {
+    if (this.CalendarPickerModel.tsLanguage === "Arabic") {
+      if (!this.CalendarPickerModel.tsWithNumbers) {
         for (let i = 0; i < this.monthDays.length; i++) {
           this.monthDays[i] = this.replaceNumberWithArabic(+this.monthDays[i])
         }
@@ -133,8 +136,8 @@ struct Month {
     }
   }
   push = (date: DATE): void => {
-    if (this.calendarModel.tsSetSelection) {
-      if (this.calendarModel.tsTypeOfCalendar === "Single") {
+    if (this.CalendarPickerModel.tsSetSelection) {
+      if (this.CalendarPickerModel.tsSelectionMode === "Single") {
         if (this.selectedDates.length == 0) {
           this.selectedDates.push(date.getDate())
         }
@@ -143,7 +146,7 @@ struct Month {
           this.selectedDates.push(date.getDate())
         }
       }
-      if (this.calendarModel.tsTypeOfCalendar === "Multi") {
+      if (this.CalendarPickerModel.tsSelectionMode === "Multi") {
         let d = date.getDate()
         let ind = this.selectedDates.findIndex(x => x[0] == d[0] && x[1] == d[1] && x[2] == d[2])
         if (ind != -1) {
@@ -153,7 +156,7 @@ struct Month {
           this.selectedDates.push(d)
         }
       }
-      if (this.calendarModel.tsTypeOfCalendar === "Range") {
+      if (this.CalendarPickerModel.tsSelectionMode === "Range") {
         let d = date.getDate()
         if (this.selectedDates.length == 0) {
           this.selectedDates.push(d)
@@ -183,8 +186,18 @@ struct Month {
         }
       }
     }
-    else {
+    if (this.clickListener){
+      let dateArray : DATE [] = []
+      for (let i = 0;i < this.selectedDates.length;i++){
+        dateArray.push(new DATE(this.selectedDates[i][0],
+          this.selectedDates[i][1],this.selectedDates[i][2]))
+      }
+//      forEach (date : this.selectedDates){
+//        dateArray.push(new DATE(date[0], date[1],date[2]))
+//      }
+      this.clickListener(dateArray)
     }
+
   }
   getMessage = (): string => {
     if (this.selectedDates.length == 0) {
@@ -195,7 +208,7 @@ struct Month {
     }
     else {
       let n = this.selectedDates.length
-      if (this.calendarModel.tsTypeOfCalendar === "Range") {
+      if (this.CalendarPickerModel.tsSelectionMode === "Range") {
         return this.selectedDates[0][0] + "/" + (this.selectedDates[0][1] + 1) + "/" + this.selectedDates[0][2] + " - " +
         this.selectedDates[n-1][0] + "/" + (this.selectedDates[n-1][1] + 1) + "/" + this.selectedDates[n-1][2]
       }
@@ -207,14 +220,16 @@ struct Month {
 
   build() {
     Column() {
-      Text(this.months[this.month-1] + " " + this.year)
-        .fontSize(this.calendarModel.tsMonthTextSize)
+      Text(this.months[this.month-1] + " " +
+      ((this.CalendarPickerModel.tsLanguage == "Arabic" &&
+      !this.CalendarPickerModel.tsWithNumbers)? this.replaceNumberWithArabic(this.year):this.year))
+        .fontSize(this.CalendarPickerModel.tsMonthTextSize)
         .alignSelf(ItemAlign.Start)
-        .fontColor(this.calendarModel.tsMonthTextColor)
+        .fontColor(this.CalendarPickerModel.tsMonthTextColor)
       Grid() {
         ForEach(this.weekDays, (item) => {
           GridItem() {
-            Text(item).fontSize(this.calendarModel.tsGridTextSize)
+            Text(item).fontSize(this.CalendarPickerModel.tsGridTextSize)
           }
         })
         ForEach(this.monthDays, (item, index) => {
@@ -224,14 +239,14 @@ struct Month {
               month: this.month - 1,
               year: this.year,
               inMonth: this.inMonthArray[index],
-              calendarModel: $calendarModel,
+              CalendarPickerModel: $CalendarPickerModel,
               selectedDates: $selectedDates
             })
           }.padding('2vp')
           .onClick(() => {
             let d: DATE = new DATE(item, this.month - 1, this.year)
             this.push(d)
-            if (this.calendarModel.tsSetSelection) {
+            if (this.CalendarPickerModel.tsSetSelection) {
               prompt.showToast({
                 message: this.getMessage()
               })
@@ -257,9 +272,9 @@ struct DialogBoxComponent {
   build() {
     Column() {
       Stack({ alignContent: Alignment.Bottom }) {
-        CalendarMainModel({
+        CalendarPickerComponent({
           options: {
-            tsTypeOfCalendar: this.options.tsTypeOfCalendar,
+            tsSelectionMode: this.options.tsSelectionMode,
             tsBgColor: this.options.tsBgColor,
             tsGridTextSize: this.options.tsGridTextSize,
             tsMonthTextSize: this.options.tsMonthTextSize,

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { CalendarMainModel, CalendarType } from '@ohos/times_square'
+import { CalendarPickerComponent, CalendarType, DATE} from '@ohos/times_square'
 
 @Entry
 @Component
@@ -25,21 +25,9 @@ struct Index {
   selectedButtonColor: ResourceColor = "#403927"
   unselectedButtonTextColor: ResourceColor = "#0c1f1a"
   selectedButtonTextColor: ResourceColor = "#f5f3ed"
-  getButtonColor= (buttonType: string, buttonName: string): ResourceColor => {
-    if (buttonType === buttonName) {
-      return this.selectedButtonColor
-    }
-    else {
-      return this.unselectedButtonColor
-    }
-  }
-  getButtonTextColor = (buttonType: string, buttonName: string): ResourceColor => {
-    if (buttonType === buttonName) {
-      return this.selectedButtonTextColor
-    }
-    else {
-      return this.unselectedButtonTextColor
-    }
+  selectedDates : DATE[] = []
+  selectedDate(dates: DATE[]) {
+    this.selectedDates = dates
   }
 
   build() {
@@ -49,110 +37,110 @@ struct Index {
           Button({ type: ButtonType.Normal }) {
             Text('Single').fontSize('20fp')
               .padding({ left: '20vp', right: '20vp' })
-              .fontColor(this.getButtonTextColor(this.buttonType, "Single"))
+              .fontColor(this.buttonType === "Single" ? this.selectedButtonTextColor : this.unselectedButtonTextColor)
           }
           .onClick(() => {
             this.buttonType = "Single"
           })
           .shadow({ radius: 10 })
-          .backgroundColor(this.getButtonColor(this.buttonType, "Single"))
+          .backgroundColor(this.buttonType === "Single" ? this.selectedButtonColor : this.unselectedButtonColor)
 
           Button({ type: ButtonType.Normal }) {
             Text('Multi').fontSize('20fp')
               .padding({ left: '20vp', right: '20vp' })
-              .fontColor(this.getButtonTextColor(this.buttonType, "Multi"))
+              .fontColor(this.buttonType === "Multi" ? this.selectedButtonTextColor : this.unselectedButtonTextColor)
           }
           .onClick(() => {
             this.buttonType = "Multi"
           })
           .shadow({ radius: 10 })
-          .backgroundColor(this.getButtonColor(this.buttonType, "Multi"))
+          .backgroundColor(this.buttonType === "Multi" ? this.selectedButtonColor : this.unselectedButtonColor)
 
           Button({ type: ButtonType.Normal }) {
             Text('Range').fontSize('20fp')
               .padding({ left: '20vp', right: '20vp' })
-              .fontColor(this.getButtonTextColor(this.buttonType, "Range"))
+              .fontColor(this.buttonType === "Range" ? this.selectedButtonTextColor : this.unselectedButtonTextColor)
           }
           .onClick(() => {
             this.buttonType = "Range"
           })
           .shadow({ radius: 10 })
-          .backgroundColor(this.getButtonColor(this.buttonType, "Range"))
+          .backgroundColor(this.buttonType === "Range" ? this.selectedButtonColor : this.unselectedButtonColor)
 
           Button({ type: ButtonType.Normal }) {
             Text('DisplayOnly').fontSize('20fp')
               .padding({ left: '20vp', right: '20vp' })
-              .fontColor(this.getButtonTextColor(this.buttonType, "DisplayOnly"))
+              .fontColor(this.buttonType === "DisplayOnly" ? this.selectedButtonTextColor : this.unselectedButtonTextColor)
           }
           .onClick(() => {
             this.buttonType = "DisplayOnly"
           })
           .shadow({ radius: 10 })
-          .backgroundColor(this.getButtonColor(this.buttonType, "DisplayOnly"))
+          .backgroundColor(this.buttonType === "DisplayOnly" ? this.selectedButtonColor : this.unselectedButtonColor)
 
           Button({ type: ButtonType.Normal }) {
             Text('Dialog').fontSize('20fp')
               .padding({ left: '20vp', right: '20vp' })
-              .fontColor(this.getButtonTextColor(this.buttonType, "Dialog"))
+              .fontColor(this.buttonType === "Dialog" ? this.selectedButtonTextColor : this.unselectedButtonTextColor)
           }
           .onClick(() => {
             this.buttonType = "Dialog"
           })
           .shadow({ radius: 10 })
-          .backgroundColor(this.getButtonColor(this.buttonType, "Dialog"))
+          .backgroundColor(this.buttonType === "Dialog" ? this.selectedButtonColor : this.unselectedButtonColor)
 
           Button({ type: ButtonType.Normal }) {
             Text('Customized').fontSize('20fp')
               .padding({ left: '20vp', right: '20vp' })
-              .fontColor(this.getButtonTextColor(this.buttonType, "Customized"))
+              .fontColor(this.buttonType === "Customized" ? this.selectedButtonTextColor : this.unselectedButtonTextColor)
           }
           .onClick(() => {
             this.buttonType = "Customized"
           })
           .shadow({ radius: 10 })
-          .backgroundColor(this.getButtonColor(this.buttonType, "Customized"))
+          .backgroundColor(this.buttonType === "Customized" ? this.selectedButtonColor : this.unselectedButtonColor)
 
           Button({ type: ButtonType.Normal }) {
             Text('Arabic').fontSize('20fp')
               .padding({ left: '20vp', right: '20vp' })
-              .fontColor(this.getButtonTextColor(this.buttonType, "Arabic"))
+              .fontColor(this.buttonType === "Arabic" ? this.selectedButtonTextColor : this.unselectedButtonTextColor)
           }
           .onClick(() => {
             this.buttonType = "Arabic"
           })
           .shadow({ radius: 10 })
-          .backgroundColor(this.getButtonColor(this.buttonType, "Arabic"))
+          .backgroundColor(this.buttonType === "Arabic" ? this.selectedButtonColor : this.unselectedButtonColor)
 
           Button({ type: ButtonType.Normal }) {
             Text('Arabic with digits').fontSize('20fp')
               .padding({ left: '20vp', right: '20vp' })
-              .fontColor(this.getButtonTextColor(this.buttonType, "Arabic with digits"))
+              .fontColor(this.buttonType === "Arabic with digits" ? this.selectedButtonTextColor : this.unselectedButtonTextColor)
           }
           .onClick(() => {
             this.buttonType = "Arabic with digits"
           })
           .shadow({ radius: 10 })
-          .backgroundColor(this.getButtonColor(this.buttonType, "Arabic with digits"))
+          .backgroundColor(this.buttonType === "Arabic with digits" ? this.selectedButtonColor : this.unselectedButtonColor)
 
           Button({ type: ButtonType.Normal }) {
             Text('Custom View').fontSize('20fp')
               .padding({ left: '20vp', right: '20vp' })
-              .fontColor(this.getButtonTextColor(this.buttonType, "Custom View"))
+              .fontColor(this.buttonType === "Custom View" ? this.selectedButtonTextColor : this.unselectedButtonTextColor)
           }
           .onClick(() => {
             this.buttonType = "Custom View"
           })
           .shadow({ radius: 10 })
-          .backgroundColor(this.getButtonColor(this.buttonType, "Custom View"))
+          .backgroundColor(this.buttonType === "Custom View" ? this.selectedButtonColor : this.unselectedButtonColor)
 
         }
       }.padding({ bottom: '10vp' })
       .scrollable(ScrollDirection.Horizontal)
 
       if (this.buttonType === 'Single') {
-        CalendarMainModel({
+        CalendarPickerComponent({
           options: {
-            tsTypeOfCalendar: CalendarType.SINGLE,
+            tsSelectionMode: CalendarType.SINGLE,
             tsIsDialog: false,
             tsBgColor: "#FFFFFF",
             tsGridTextSize: '14fp',
@@ -168,13 +156,14 @@ struct Index {
             tsWithNumbers: true,
             tsLanguage: "English",
             tsGridShape: "Square"
-          }
+          },
+          clickListener: (selectedDate) => this.selectedDate (selectedDate)
         })
       }
       if (this.buttonType === 'Multi') {
-        CalendarMainModel({
+        CalendarPickerComponent({
           options: {
-            tsTypeOfCalendar: CalendarType.MULTI,
+            tsSelectionMode: CalendarType.MULTI,
             tsBgColor: "#FFFFFF",
             tsGridTextSize: '14fp',
             tsMonthTextSize: '14fp',
@@ -189,13 +178,14 @@ struct Index {
             tsWithNumbers: true,
             tsLanguage: "English",
             tsGridShape: "Square"
-          }
+          },
+          clickListener: (selectedDate) => this.selectedDate (selectedDate)
         })
       }
       if (this.buttonType === 'Range') {
-        CalendarMainModel({
+        CalendarPickerComponent({
           options: {
-            tsTypeOfCalendar: CalendarType.RANGE,
+            tsSelectionMode: CalendarType.RANGE,
             tsBgColor: "#FFFFFF",
             tsGridTextSize: '14fp',
             tsMonthTextSize: '14fp',
@@ -210,13 +200,14 @@ struct Index {
             tsWithNumbers: true,
             tsLanguage: "English",
             tsGridShape: "Square"
-          }
+          },
+          clickListener: (selectedDate) => this.selectedDate (selectedDate)
         })
       }
       if (this.buttonType === "DisplayOnly") {
-        CalendarMainModel({
+        CalendarPickerComponent({
           options: {
-            tsTypeOfCalendar: CalendarType.SINGLE,
+            tsSelectionMode: CalendarType.SINGLE,
             tsBgColor: "#FFFFFF",
             tsGridTextSize: '14fp',
             tsMonthTextSize: '14fp',
@@ -231,13 +222,14 @@ struct Index {
             tsWithNumbers: true,
             tsLanguage: "English",
             tsGridShape: "Square"
-          }
+          },
+          clickListener: (selectedDate) => this.selectedDate (selectedDate)
         })
       }
       if (this.buttonType === "Dialog") {
-        CalendarMainModel({
+        CalendarPickerComponent({
           options: {
-            tsTypeOfCalendar: CalendarType.MULTI,
+            tsSelectionMode: CalendarType.MULTI,
             tsIsDialog: true,
             tsBgColor: "#FFFFFF",
             tsGridTextSize: '14fp',
@@ -253,13 +245,14 @@ struct Index {
             tsWithNumbers: true,
             tsLanguage: "English",
             tsGridShape: "Square"
-          }
+          },
+          clickListener: (selectedDate) => this.selectedDate (selectedDate)
         })
       }
       if (this.buttonType === "Customized") {
-        CalendarMainModel({
+        CalendarPickerComponent({
           options: {
-            tsTypeOfCalendar: CalendarType.RANGE,
+            tsSelectionMode: CalendarType.RANGE,
             tsIsDialog: true,
             tsBgColor: "#FFFFFF",
             tsGridTextSize: '14fp',
@@ -275,13 +268,14 @@ struct Index {
             tsWithNumbers: true,
             tsLanguage: "English",
             tsGridShape: "Circle"
-          }
+          },
+          clickListener: (selectedDate) => this.selectedDate (selectedDate)
         })
       }
       if (this.buttonType === "Arabic") {
-        CalendarMainModel({
+        CalendarPickerComponent({
           options: {
-            tsTypeOfCalendar: CalendarType.SINGLE,
+            tsSelectionMode: CalendarType.SINGLE,
             tsBgColor: "#FFFFFF",
             tsGridTextSize: '14fp',
             tsMonthTextSize: '14fp',
@@ -296,13 +290,14 @@ struct Index {
             tsWithNumbers: false,
             tsLanguage: "Arabic",
             tsGridShape: "Square"
-          }
+          },
+          clickListener: (selectedDate) => this.selectedDate (selectedDate)
         })
       }
       if (this.buttonType === "Arabic with digits") {
-        CalendarMainModel({
+        CalendarPickerComponent({
           options: {
-            tsTypeOfCalendar: CalendarType.SINGLE,
+            tsSelectionMode: CalendarType.SINGLE,
             tsBgColor: "#FFFFFF",
             tsGridTextSize: '14fp',
             tsMonthTextSize: '14fp',
@@ -317,14 +312,15 @@ struct Index {
             tsWithNumbers: true,
             tsLanguage: "Arabic",
             tsGridShape: "Square"
-          }
+          },
+          clickListener: (selectedDate) => this.selectedDate (selectedDate)
         })
       }
 
       if (this.buttonType === "Custom View") {
-        CalendarMainModel({
+        CalendarPickerComponent({
           options: {
-            tsTypeOfCalendar: CalendarType.SINGLE,
+            tsSelectionMode: CalendarType.SINGLE,
             tsBgColor: "#FFFFFF",
             tsGridTextSize: '14fp',
             tsMonthTextSize: '14fp',
@@ -340,7 +336,8 @@ struct Index {
             tsLanguage: "English",
             tsGridShape: "Square",
             tsDayIcon: $r('app.media.app_icon')
-          }
+          },
+          clickListener: (selectedDate) => this.selectedDate (selectedDate)
         })
       }
     }.padding('20vp')

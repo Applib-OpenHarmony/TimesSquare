@@ -15,7 +15,7 @@
  */
 
 export interface CalendarOptions {
-  tsTypeOfCalendar: CalendarType
+  tsSelectionMode: CalendarType
   tsIsDialog?: boolean
   tsBgColor?: ResourceColor
   tsGridTextSize?: number | string

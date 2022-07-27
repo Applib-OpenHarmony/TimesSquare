@@ -16,9 +16,9 @@
 
 import { CalendarOptions, CalendarType } from './Types'
 
-export class CalendarModel implements CalendarOptions {
+export class CalendarPickerModel implements CalendarOptions {
   tsSelectedDates: number [][] = []
-  tsTypeOfCalendar: CalendarType = CalendarType.SINGLE
+  tsSelectionMode: CalendarType = CalendarType.SINGLE
   tsIsDialog: boolean = false
   tsBgColor: ResourceColor = "#FFFFFF"
   tsGridTextSize: number | string  = '14fp'
@@ -38,7 +38,7 @@ export class CalendarModel implements CalendarOptions {
   tsDayIcon: Resource = $r('app.string.page_show')
   constructor(options?: CalendarOptions) {
     if (options != undefined) {
-      if (options.tsTypeOfCalendar != undefined) this.tsTypeOfCalendar = options.tsTypeOfCalendar
+      if (options.tsSelectionMode != undefined) this.tsSelectionMode = options.tsSelectionMode
       if (options.tsIsDialog != undefined) this.tsIsDialog = options.tsIsDialog
       if (options.tsBgColor != undefined) this.tsBgColor = options.tsBgColor
       if (options.tsGridTextSize != undefined) this.tsGridTextSize = options.tsGridTextSize

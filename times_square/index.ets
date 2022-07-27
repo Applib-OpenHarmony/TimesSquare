@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
-export { CalendarMainModel } from './src/main/ets/components/Common/CalendarMain'
+export { CalendarPickerComponent } from './src/main/ets/components/Common/CalendarPickerComponent'
 
 export { CalendarOptions, CalendarType }from './src/main/ets/components/Common/Types'
+
+export { DATE } from './src/main/ets/components/Common/DATE'

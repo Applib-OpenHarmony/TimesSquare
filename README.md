@@ -16,55 +16,31 @@ For using Times Square in your app, add the below dependency in the entry/packag
 
 ## Usage instructions
 ****
-#### Import all components at once
+To use time square calendar, Import the CalendarPickerComponent and set calendar options as below
 ```
-import { CalendarMainModel, CalendarType } from '@ohos/times_square'
-```
+import { CalendarPickerComponent, CalendarType } from '@ohos/times_square'
 
-#### Code
-To use the calendar dependency
-```
-CalendarMainModel({
-  options{
-          tsTypeOfCalendar: CalendarType.SINGLE, // Type of Calendar CalendarType.[Single|Multi|Range]
-          tsBgColor: "#FFFFFF", //Calendar background color
-          tsGridTextSize: '14fp', //Calendar grid text size
-          tsMonthTextSize: '14fp', //Calendar month text size
-          tsMonthTextColor: "#000000", //Calendar month text color
-          tsSelectedTextColor: "#fafafa", //Calendar selected text color
-          tsSelectedGridBackgroundColor: "#3a4352", //Calendar selected grid background color
-          tsNotInMonthTextColor: "#787a7d", //Calendar not in month text color
-          tsInMonthColor: "#ebf5ef", //Calendar in month text color
-          tsNotInMonthColor: "#d0d9d4", //Calendar grid not in month color
-          tsInMonthTextColor: "#303133", //Calendar grid in month color
-          tsSetSelection: true, //Setting selection
-          tsWithNumbers: true, //Display numbers [For arabic only]
-          tsLanguage: "English", //[English|Arabic]
-          tsGridShape: "Square", //Calendar grid shape [Square|Circle]
-          tsDayIcon: $r('app.media.app_icon'), //Calendar day icon
-          }
-```
-Options : CalendarOptions to set the options of the calendar
-For example : 
-```
-options: {
-            tsTypeOfCalendar: CalendarType.SINGLE,
-            tsBgColor: "#FFFFFF",
-            tsGridTextSize: '14fp',
-            tsMonthTextSize: '14fp',
-            tsMonthTextColor: "#000000",
-            tsSelectedTextColor: "#fafafa",
-            tsSelectedGridBackgroundColor: "#3a4352",
-            tsNotInMonthTextColor: "#787a7d",
-            tsInMonthColor: "#ebf5ef",
-            tsNotInMonthColor: "#d0d9d4",
-            tsInMonthTextColor: "#303133",
-            tsSetSelection: true,
-            tsWithNumbers: true,
-            tsLanguage: "English",
-            tsGridShape: "Square",
-            tsDayIcon: $r('app.media.app_icon')
-          }
+CalendarPickerComponent({
+          options: {
+            tsSelectionMode: CalendarType.SINGLE, // Type of Calendar CalendarType.[Single|Multi|Range]
+            tsIsDialog: false, // Show calendar in dialog or not.
+            tsBgColor: "#FFFFFF", // Background color of calendar.
+            tsGridTextSize: '14fp', // Text size of grid.
+            tsMonthTextSize: '14fp', // Text size of month.
+            tsMonthTextColor: "#000000", // Text color of month.
+            tsSelectedTextColor: "#fafafa", // Text color of selected date.
+            tsSelectedGridBackgroundColor: "#3a4352", // Background color of selected date.
+            tsNotInMonthTextColor: "#787a7d", // Text color of not in month date.
+            tsInMonthColor: "#ebf5ef", // Background color of in month date.
+            tsNotInMonthColor: "#d0d9d4", // Background color of not in month date.
+            tsInMonthTextColor: "#303133", // Text color of in month date.
+            tsSetSelection: true, // Set selection on calendar.
+            tsWithNumbers: true, // Show numbers on calendar.
+            tsLanguage: "English", // Language of calendar.
+            tsGridShape: "Square" // Shape of grid.
+          },
+          clickListener: (selectedDate) => this.selectedDate (selectedDate)
+        })
 ```
 ## Screenshots
 ****
@@ -82,7 +58,7 @@ You can style the Calendar  using theses attributes :
 
 | Attribute | Description |
 | -------- | ----------- |
-|tsTypeOfCalendar|Type of the calendar|
+|tsSelectionMode|Type of the calendar|
 |tsBgColor|Background color of the calendar|
 |tsGridTextSize|Calendar grid text size|
 |tsMonthTextSize|Calendar month text size|
