@@ -286,7 +286,8 @@ struct Index {
             tsInMonthColor: "#ebf5ef",
             tsNotInMonthColor: "#d0d9d4",
             tsInMonthTextColor: "#303133",
-            tsSetSelection: true,
+            tsSetSelection: false,
+            tsIsDialog: true,
             tsWithNumbers: false,
             tsLanguage: "Arabic",
             tsGridShape: "Square"
@@ -308,7 +309,8 @@ struct Index {
             tsInMonthColor: "#ebf5ef",
             tsNotInMonthColor: "#d0d9d4",
             tsInMonthTextColor: "#303133",
-            tsSetSelection: true,
+            tsSetSelection: false,
+            tsIsDialog: true,
             tsWithNumbers: true,
             tsLanguage: "Arabic",
             tsGridShape: "Square"

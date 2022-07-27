@@ -192,9 +192,6 @@ struct Month {
         dateArray.push(new DATE(this.selectedDates[i][0],
           this.selectedDates[i][1],this.selectedDates[i][2]))
       }
-//      forEach (date : this.selectedDates){
-//        dateArray.push(new DATE(date[0], date[1],date[2]))
-//      }
       this.clickListener(dateArray)
     }
 
